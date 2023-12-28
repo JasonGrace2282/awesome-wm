@@ -110,30 +110,6 @@ local bat = lain.widget.bat({
   end
 })
 
--- ALSA volume
--- theme.volume = lain.widget.alsa({
---   --togglechannel = "IEC958,3",
---   settings = function()
---     header = " Vol "
---     vlevel = "~"
---     awful.spawn.easy_async("wpctl get-volume @DEFAULT_AUDIO_SINK@", function (stdout)
---       vlevel = math.floor(tonumber(stdout)*100+0.5)
---     end)
---
---
---     widget:set_markup(markup.font(theme.font, markup(gray, header) .. markup(white, vlevel)))
---   end
--- })
-
--- Weather
---[[ to be set before use
-theme.weather = lain.widget.weather({
-    --APPID =
-    city_id = 2643743, -- placeholder (London)
-    notification_preset = { fg = white }
-})
---]]
-
 -- Separators
 local first     = wibox.widget.textbox('<span font="Terminus 4"> </span>')
 local arrl_pre  = separators.arrow_right("alpha", "#1A1A1A")
@@ -151,11 +127,9 @@ function theme.at_screen_connect(s)
   gears.wallpaper.maximized(wallpaper, s, true)
 
   -- Tags
-
-  awful.util.tagnames = { "firefox", "terminal", "discord", "spotify", "zathura" }
+  awful.util.tagnames = { "main", "discord", "spotify", "zathura" }
   local suit = awful.layout.suit
   awful.tag(awful.util.tagnames, s, {
-    suit.floating,
     suit.tile,
     suit.floating,
     suit.floating,
