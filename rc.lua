@@ -827,7 +827,13 @@ awful.rules.rules = {
 	{ rule = { class = "Firefox" }, properties = { screen = 1, tag = "firefox" } },
 
 	{ rule = { class = "kitty" },
-	   properties = { screen = 1, tag = "terminal", maximized_horizontal = true, maximized_vertical = true } },
+	   properties = {
+       screen = 1,
+       tag = "terminal",
+       -- maximized_horizontal = true,
+       -- maximized_vertical = true
+     }
+  },
 
 	{ rule = { class = "Spotify" }, properties = { screen = 1, tag = "spotify" } },
 

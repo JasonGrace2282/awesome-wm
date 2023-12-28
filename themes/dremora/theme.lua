@@ -7,6 +7,9 @@
 -- CUSTOM WIDGETS
 volume_widget                                   = require('awesome-wm-widgets.pactl-widget.volume')
 
+-- tiling?
+-- local treesome                                  = require("treesome")
+
 -- normal theme stuff
 local gears                                     = require("gears")
 local lain                                      = require("lain")
@@ -29,8 +32,8 @@ theme.bg_focus                                  = "#0C4A50" -- selected tab bg
 theme.fg_urgent                                 = "#CC9393"
 theme.bg_urgent                                 = "#2A1F1E"
 theme.border_width                              = dpi(9)
-theme.border_normal                             = "#ffffff"
-theme.border_focus                              = "#292929"
+theme.border_normal                             = "#000000"
+theme.border_focus                              = theme.bg_focus
 theme.titlebar_bg_focus                         = "#303030"
 theme.taglist_fg_focus                          = theme.fg_focus
 theme.taglist_bg_focus                          = theme.bg_focus -- ex) #c12d00
@@ -75,10 +78,6 @@ theme.titlebar_maximized_button_focus_inactive  = theme.dir .. "/icons/titlebar/
 theme.titlebar_maximized_button_normal_inactive = theme.dir .. "/icons/titlebar/maximized_normal_inactive.png"
 -- USER
 
-
-
-awful.util.tagnames = { "firefox", "terminal", "discord", "spotify", "zathura" }
-
 local markup        = lain.util.markup
 local separators    = lain.util.separators
 local white         = theme.fg_focus
@@ -98,67 +97,6 @@ theme.cal           = lain.widget.cal({
     bg   = theme.bg_normal
   }
 })
-
--- Mail IMAP check
---[[ to be set before use
-theme.mail = lain.widget.imap({
-    timeout  = 180,
-    server   = "server",
-    mail     = "mail",
-    password = "keyring get mail",
-    notification_preset = { fg = white }
-    settings = function()
-        mail  = ""
-        count = ""
-
-        if mailcount > 0 then
-            mail = "Mail "
-            count = mailcount .. " "
-        end
-
-        widget:set_markup(markup.font(theme.font, markup(gray, mail) .. markup(white, count)))
-    end
-})
---]]
-
---[[
--- MPD
-theme.mpd = lain.widget.mpd({
-  settings = function()
-    mpd_notification_preset.fg = white
-    artist                     = mpd_now.artist .. " "
-    title                      = mpd_now.title .. " "
-
-    if mpd_now.state == "pause" then
-      artist = "mpd "
-      title  = "paused "
-    elseif mpd_now.state == "stop" then
-      artist = ""
-      title  = ""
-    end
-
-    widget:set_markup(markup.font(theme.font, markup(gray, artist) .. markup(white, title)))
-  end
-})
---]]
-
--- /home fs
---[[ commented because it needs Gio/Glib >= 2.54
-theme.fs = lain.widget.fs({
-    notification_preset = { fg = white, bg = theme.bg_normal, font = "Terminus 10.5" },
-    settings  = function()
-        fs_header = ""
-        fs_p      = ""
-
-        if fs_now["/home"].percentage >= 90 then
-            fs_header = " Hdd "
-            fs_p      = fs_now["/home"].percentage
-        end
-
-        widget:set_markup(markup.font(theme.font, markup(gray, fs_header) .. markup(white, fs_p)))
-    end
-})
---]]
 
 -- Battery
 local bat = lain.widget.bat({
@@ -213,7 +151,16 @@ function theme.at_screen_connect(s)
   gears.wallpaper.maximized(wallpaper, s, true)
 
   -- Tags
-  awful.tag(awful.util.tagnames, s, awful.layout.layouts[1])
+
+  awful.util.tagnames = { "firefox", "terminal", "discord", "spotify", "zathura" }
+  local suit = awful.layout.suit
+  awful.tag(awful.util.tagnames, s, {
+    suit.floating,
+    suit.tile,
+    suit.floating,
+    suit.floating,
+    suit.floating
+  })
 
   -- Create a promptbox for each screen
   s.mypromptbox = awful.widget.prompt()
