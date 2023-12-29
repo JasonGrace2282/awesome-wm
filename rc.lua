@@ -279,7 +279,10 @@ end)
 
 -- Create a wibox for each screen and add it
 awful.screen.connect_for_each_screen(function(s)
-	beautiful.at_screen_connect(s)
+	local status = pcall(function() beautiful.at_screen_connect(s) end)
+  if not status then
+    naughty.notify(status)
+  end
 end)
 
 -- }}}
@@ -824,14 +827,22 @@ awful.rules.rules = {
 	},
 
 	-- Set Firefox to always map on the tag named "2" on screen 1.
-	{ rule = { class = "Firefox" }, properties = { screen = 1, tag = "main" } },
+	{ rule = { class = "Firefox" },
+      properties = {
+        screen = 1,
+        -- tag = "main",
+        -- floating = false,
+        -- maximized_horizontal = false,
+        -- maximized_vertical = false,
+    }
+  },
 
 	{ rule = { class = "kitty" },
-	   properties = {
-       screen = 1,
-       tag = "main",
-       -- maximized_horizontal = true,
-       -- maximized_vertical = true
+	    properties = {
+        screen = 1,
+        tag = "coding",
+        -- maximized_horizontal = true,
+        -- maximized_vertical = true
      }
   },
 
@@ -839,7 +850,6 @@ awful.rules.rules = {
 
 	{ rule = { class = "discord" }, properties = { screen = 1, tag = "discord" } },
 
-	{ rule = { class = "zathura" }, properties = { screen = 1, tag = "zathura" } },
 }
 
 -- }}}
@@ -964,4 +974,9 @@ client.connect_signal("unmanage", backham)
 tag.connect_signal("property::selected", backham)
 
 -- }}}
+
+picom_status = pcall(function() awful.spawn.once("picom -b") end)
+if not picom_status then
+  naughty.notify(picom_status)
+end
 

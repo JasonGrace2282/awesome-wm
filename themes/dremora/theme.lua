@@ -127,9 +127,10 @@ function theme.at_screen_connect(s)
   gears.wallpaper.maximized(wallpaper, s, true)
 
   -- Tags
-  awful.util.tagnames = { "main", "discord", "spotify", "zathura" }
+  awful.util.tagnames = { "main", "coding", "discord", "spotify", "misc"}
   local suit = awful.layout.suit
   awful.tag(awful.util.tagnames, s, {
+    suit.floating,
     suit.tile,
     suit.floating,
     suit.floating,
