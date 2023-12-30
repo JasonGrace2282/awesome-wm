@@ -99,18 +99,6 @@ theme.cal           = lain.widget.cal({
   }
 })
 
--- Battery
-local bat = lain.widget.bat({
-  settings = function()
-    bat_header = " Bat "
-    bat_p      = bat_now.perc .. "% "
-    if bat_p == "N/A% " then
-      bat_p = "~%"
-    end
-    widget:set_markup(markup.font(theme.font, markup(gray, bat_header) .. markup(white, bat_p)))
-  end
-})
-
 -- Separators
 local first     = wibox.widget.textbox('<span font="Terminus 4"> </span>')
 local arrl_pre  = separators.arrow_right("alpha", "#1A1A1A")
@@ -184,12 +172,7 @@ function theme.at_screen_connect(s)
       layout = wibox.layout.fixed.horizontal,
       wibox.widget.systray(),
       first,
-      -- theme.mpd.widget,
-      --theme.mail.widget,
-      --theme.fs.widget,
-      -- bat.widget,
       battery_widget,
-      -- theme.volume.widget,
       volume_widget(),
       mytextclock,
     },
