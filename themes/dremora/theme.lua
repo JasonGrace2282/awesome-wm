@@ -6,6 +6,7 @@
 --]]
 -- CUSTOM WIDGETS
 volume_widget                                   = require('awesome-wm-widgets.pactl-widget.volume')
+local battery_widget                            = require('awesome-wm-widgets.battery-widget.battery')
 
 -- tiling?
 -- local treesome                                  = require("treesome")
@@ -186,7 +187,8 @@ function theme.at_screen_connect(s)
       -- theme.mpd.widget,
       --theme.mail.widget,
       --theme.fs.widget,
-      bat.widget,
+      -- bat.widget,
+      battery_widget,
       -- theme.volume.widget,
       volume_widget(),
       mytextclock,
