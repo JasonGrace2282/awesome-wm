@@ -316,10 +316,6 @@ globalkeys = mytable.join(
 		lain.util.tag_view_nonempty(1)
 	end, { description = "view  previous nonempty", group = "tag" }),
 
-	-- open terminal
-	-- awful.key({ modkey, }, "Return", function() awful.spawn(terminal) end,
-	--  { description = "open a terminal", group = "awesome" }),
-
 	-- Default client focus
 	awful.key({ altkey }, "j", function()
 		awful.client.focus.byidx(1)
@@ -413,44 +409,12 @@ globalkeys = mytable.join(
 		lain.util.useless_gaps_resize(-1)
 	end, { description = "decrement useless gaps", group = "tag" }),
 
-	-- Dynamic tagging
-	awful.key({ modkey, "Shift" }, "n", function()
-		lain.util.add_tag()
-	end, { description = "add new tag", group = "tag" }),
-	awful.key({ modkey, "Shift" }, "r", function()
-		lain.util.rename_tag()
-	end, { description = "rename tag", group = "tag" }),
-	awful.key({ modkey, "Shift" }, "Left", function()
-		lain.util.move_tag(-1)
-	end, { description = "move tag to the left", group = "tag" }),
-	awful.key({ modkey, "Shift" }, "Right", function()
-		lain.util.move_tag(1)
-	end, { description = "move tag to the right", group = "tag" }),
-	awful.key({ modkey, "Shift" }, "d", function()
-		lain.util.delete_tag()
-	end, { description = "delete tag", group = "tag" }),
-
 	-- Standard program
 	awful.key({ modkey }, "Return", function()
 		awful.spawn(terminal)
 	end, { description = "open a terminal", group = "launcher" }),
 	awful.key({ modkey, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
 	awful.key({ modkey, "Shift" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
-	awful.key({ modkey, altkey }, "l", function()
-		awful.tag.incmwfact(0.05)
-	end, { description = "increase master width factor", group = "layout" }),
-	awful.key({ modkey, altkey }, "h", function()
-		awful.tag.incmwfact(-0.05)
-	end, { description = "decrease master width factor", group = "layout" }),
-	awful.key({ modkey, "Shift" }, "h", function()
-		awful.tag.incnmaster(1, nil, true)
-	end, { description = "increase the number of master clients", group = "layout" }),
-	awful.key({ modkey, "Shift" }, "l", function()
-		awful.tag.incnmaster(-1, nil, true)
-	end, { description = "decrease the number of master clients", group = "layout" }),
-	awful.key({ modkey, "Control" }, "h", function()
-		awful.tag.incncol(1, nil, true)
-	end, { description = "increase the number of columns", group = "layout" }),
 	awful.key({ modkey, "Control" }, "l", function()
 		awful.tag.incncol(-1, nil, true)
 	end, { description = "decrease the number of columns", group = "layout" }),
