@@ -1,3 +1,5 @@
+Note: you can now find my config here: https://github.com/JasonGrace2282/configs
+
 My Awsome WM Config
 ===================
 
